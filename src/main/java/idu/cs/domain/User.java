@@ -13,7 +13,20 @@ public class User {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id; 
 	// database에서 sequence number, primary key 역할
-	
+	private String userId;
+	private String userPw;
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	public String getUserPw() {
+		return userPw;
+	}
+	public void setUserPw(String userPw) {
+		this.userPw = userPw;
+	}
 	private String name;
 	private String company;
 	

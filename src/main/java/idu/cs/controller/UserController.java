@@ -2,6 +2,7 @@ package idu.cs.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -19,16 +20,36 @@ import idu.cs.exception.ResourceNotFoundException;
 import idu.cs.repository.UserRepository;
 
 @Controller
-public class HomeController {
+public class UserController {
 	@Autowired UserRepository userRepo; // Dependency Injection
 	
 	@GetMapping("/")
 	public String home(Model model) {
 		return "index";
 	}
-	@GetMapping("/user-reg-form")
+	@GetMapping("/user-login-form")
+	public String getLoginForm(Model model) {
+		return "login";
+	}
+	@PostMapping("/login")
+	public String loginUser(@Valid User user, HttpSession session) {
+		System.out.println("login process: ");
+		User sessionUser = userRepo.findByUserId(user.getUserId());
+		if(sessionUser == null) {
+			System.out.println("id error");
+			return "redirect:/user-login-form";
+		}
+		if(!sessionUser.getUserPw().equals(user.getUserPw())){
+			System.out.println("pw error");
+			return "redirect:/user-login-form";
+		}
+		//userRepo.save(user);
+		session.setAttribute("user", sessionUser);
+		return "redirect:/";
+	}
+	@GetMapping("/user-register-form")
 	public String getRegForm(Model model) {
-		return "form";
+		return "register";
 	}
 	@GetMapping("/users")
 	public String getAllUser(Model model) {
@@ -36,8 +57,11 @@ public class HomeController {
 		return "userlist";
 	}
 	@PostMapping("/users")
-	public String createUser(@Valid @RequestBody User user, Model model) {
-		userRepo.save(user);
+	public String createUser(@Valid User user, Model model) {
+		if(userRepo.save(user) != null)
+			System.out.println("Database 등록");
+		else
+			System.out.println("Database 실패");
 		model.addAttribute("users", userRepo.findAll());
 		return "redirect:/users";
 	}
