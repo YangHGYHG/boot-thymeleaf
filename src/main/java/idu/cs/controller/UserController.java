@@ -92,6 +92,7 @@ public class UserController {
 	@PutMapping("/users/{id}") // @PatchMapping
 	public String updateUser(@PathVariable(value = "id") Long userId, @Valid User userDetails, Model model) {
 		User user = userRepo.findById(userId).get();//user는 DB로 부터 읽어온 객체
+		user.setUserPw(userDetails.getUserPw());
 		user.setName(userDetails.getName());// userDetails는 전송한 객체
 		user.setCompany(userDetails.getCompany());
 		userRepo.save(user);
@@ -102,6 +103,6 @@ public class UserController {
 		User user = userRepo.findById(userId).get();
 		userRepo.delete(user);
 		model.addAttribute("name", user.getName());
-		return "user-deleted";
+		return "redirect:/users";
 	}
 }

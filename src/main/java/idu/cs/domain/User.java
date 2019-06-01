@@ -14,21 +14,12 @@ public class User {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id; 
 	// database에서 sequence number, auto increment => primary key 역할
-	@Column(nullable=false, length=20, unique=true)
+
 	private String userId;
 	private String userPw;
 	private String name;
 	private String company;
 	
-	public User(String userId, String userPw, String name, String company) {
-		super();
-		this.userId = userId;
-		this.userPw = userPw;
-		this.name = name;
-		this.company = company;
-	}
-	
-	public User() {}
 	
 	
 	public String getUserId() {

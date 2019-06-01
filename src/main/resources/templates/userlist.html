@@ -61,7 +61,10 @@
 						</div>
 						<div th:each="user : ${users}">
 						<div class="table-row">
-							<div class="serial">01</div>
+							<div class="serial">
+							<a th:href="@{/users/{id}(id=${user.id})}">
+							<span th:text="${user.id}"></a></span>
+							</div>
 							<div class="country"> <span th:text="${user.userId}"></span></div>
 							<div class="visit"><span th:text="${user.name}"></span></div>
 							<div class="percentage"><span th:text="${user.company}"></span></div>
