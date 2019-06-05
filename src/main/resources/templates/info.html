@@ -1,11 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <th:block th:include="fragments/header"></th:block>
+<th:block th:include="fragments/header"></th:block>
 </head>
 
 <body>
-<th:block th:include="fragments/nav"></th:block>
+	<th:block th:include="fragments/nav"></th:block>    
+	
 	<!-- breadcrumb start-->
     <section class="breadcrumb breadcrumb_bg">
         <div class="container">
@@ -24,22 +25,17 @@
 	<!-- End banner Area -->
 	
 	<div class="whole-wrap">
-		<div class="container box_1170">
-			
-			
-			
-			
-			
-			
-			
+		<div class="container box_1170">			
 			<div class="section-top-border">
 				<div class="row">
-				<div class="col-lg-2 col-md-2 mt-sm-30">
+					<div class="col-lg-2 col-md-2 mt-sm-30">
 					</div>
 					<div class="col-lg-8 col-md-8">
 						<h3 class="mb-30">회원 정보 확인 및 수정</h3>
-						<form th:action="@{'/users/{id}'(id=${id})}" th:method="put" th:object="${user}">
-						<!-- form field의 이름은 domain 객체의 field 이름과 같아야함 -->
+						<form th:object="${user}" 
+							th:action="@{'/users/{id}'(id=${user.id})}" 
+								th:method="put">
+							<!-- form field의 이름은 domain 객체의 field 이름과 같아야 함 -->
 							<div class="mt-10">
 								<input type="text" th:field="*{userId}" name="userId" placeholder="사용자 아이디" onfocus="this.placeholder = ''" onblur="this.placeholder = '사용자 아이디'" required="" class="single-input" ReadOnly>
 							</div>
