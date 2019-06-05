@@ -25,7 +25,6 @@ import idu.cs.service.UserService;
 // Spring 이 이 클래스로 부터 Bean 객체를 생성해서 등록할 수 있음
 public class UserController {
 	@Autowired UserService userService;
-	
 	@GetMapping("/")
 	public String home(Model model) { 
 		return "index";
