@@ -40,7 +40,6 @@ public class QuestionEntity {
 		question.setCreateTime(createTime);
 		return question;
 	}
-	
 	public void buildEntity(Question question) {		
 		id = question.getId();
 		title = question.getTitle();
